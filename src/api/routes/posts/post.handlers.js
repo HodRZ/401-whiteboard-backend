@@ -9,38 +9,48 @@ async function getPost(req, res) {
     })
 };
 
-async function createPost(req, res) {
+async function createPost(req, res, next) {
     const newPost = req.body;
-    const post = await Post.create(newPost);
-    res.status(201).send(post);
+    try {
+        const post = await Post.create(newPost);
+        res.status(201).send(post);
+    } catch (err) { next(err) }
 };
 
-async function getPostById(req, res) {
+async function getPostById(req, res, next) {
     const id = req.params.id;
-    const post = await Post.findOne({
-        where: { id: id }
-    });
-    res.status(200).json(post)
+    try {
+        const post = await Post.findOne({
+            where: { id: id }
+        });
+        res.status(200).json(post)
+    } catch (err) { next(err) }
 };
 
-async function deletePost(req, res) {
+async function deletePost(req, res, next) {
     const id = req.params.id;
-    let deletedPost = await Post.destroy({
-        where: { id: id },
-        returning: true
-    });
-    res.status(204).json({ deletedPost });
+    try {
+        let deletedPost = await Post.destroy({
+            where: { id: id },
+            returning: true
+        });
+        res.status(204).json({ deletedPost });
+    } catch (err) {
+        next(err)
+    }
 };
 
-async function updatePost(req, res) {
+async function updatePost(req, res, next) {
     const id = req.params.id;
     const post = req.body;
-    const updatedPost = await Post.update(post, {
-        where: { id: id },
-        returning: true,
-        plain: true
-    });
-    res.status(200).json(updatedPost);
+    try {
+        const updatedPost = await Post.update(post, {
+            where: { id: id },
+            returning: true,
+            plain: true
+        });
+        res.status(200).json(updatedPost);
+    } catch (err) { next(err) }
 }
 
 module.exports = {

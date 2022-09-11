@@ -41,4 +41,7 @@ this app uses the **PERN Stack**
 - 1.1.2
   - Fix env varriables to connect to remote DB
   - Used **delete (/post)** to clean the database after testing
+
+- 1.2.0
+  -Add error handlers
  <!-- ## Credit and Collaborations -->

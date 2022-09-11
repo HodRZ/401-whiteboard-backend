@@ -66,7 +66,6 @@ describe('/Post Route', () => {
         expect(img).toEqual(updated.image)
         await request.delete(`/post/${id}`);
     });
-
     it('Delete, should delete a post', async () => {
         const newPost = {
             "title": "test from server.test",
