@@ -38,7 +38,7 @@ this app uses the **PERN Stack**
   - Fix .env variables
   - Fix SSL for herkou deployment
 
-- 1.2.0
+- 1.1.2
   - Fix env varriables to connect to remote DB
   - Used **delete (/post)** to clean the database after testing
  <!-- ## Credit and Collaborations -->
