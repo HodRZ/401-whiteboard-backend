@@ -36,4 +36,5 @@ this app uses the **PERN Stack**
 
 - 1.1.1
   - Fix .env variables
+  - Fix SSL for herkou deployment
  <!-- ## Credit and Collaborations -->
