@@ -14,8 +14,7 @@ const sequelizeOption = {
 
 module.exports = {
     PORT: process.env.PORT,
-    LOCALDB_URL: process.env.LOCALDB_URL,
-    REMOTEDB_URL: process.env.REMOTEDB_URL,
+    DATABASE_URL: process.env.DATABASE_URL,
     sequelizeOption,
     express
 }

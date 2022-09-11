@@ -8,7 +8,7 @@
 
 **Frontend repo**: TBA
 
-**Live Url** : to be released
+**Live Url** : [whiteboard](https://whiteboard-hod.herokuapp.com/)
 
 ## Overview
 
@@ -29,7 +29,11 @@ this app uses the **PERN Stack**
 ## Change Log
 
 - 1.0.0 : add app basic skeleton and dependencies
+
 - 1.1.0 :
-  - add routing for *post* endpoint
+  - add routing for */post* endpoint
   - add connection to DB
+
+- 1.1.1
+  - Fix .env variables
  <!-- ## Credit and Collaborations -->
