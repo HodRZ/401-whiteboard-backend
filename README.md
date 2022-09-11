@@ -29,5 +29,7 @@ this app uses the **PERN Stack**
 ## Change Log
 
 - 1.0.0 : add app basic skeleton and dependencies
-
+- 1.1.0 :
+  - add routing for *post* endpoint
+  - add connection to DB
  <!-- ## Credit and Collaborations -->
