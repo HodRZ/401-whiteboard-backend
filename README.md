@@ -43,5 +43,8 @@ this app uses the **PERN Stack**
   - Used **delete (/post)** to clean the database after testing
 
 - 1.2.0
-  -Add error handlers
+  - Add error handlers
+
+- 1.2.1
+  - Add env to workflow
  <!-- ## Credit and Collaborations -->
