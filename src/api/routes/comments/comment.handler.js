@@ -14,9 +14,9 @@ async function getCmnt(req, res, next) {
 };
 
 async function createCmnt(req, res, next) {
-    console.log('hi from post')
+    const postId = req.params.id
+    req.body.postId = postId
     const newCmnt = req.body;
-    console.log(newCmnt)
     try {
         const comment = await Cmnt.create(newCmnt);
         res.status(201).send(comment);

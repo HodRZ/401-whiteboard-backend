@@ -11,7 +11,7 @@ router.get('/comment', getCmnt);
 router.get('/comment/:id', getCmntById)
 router.get('/commentAll', populate)
 router.use(handleNotFound)
-router.post('/comment', createCmnt)
+router.post('/post/:id/comment', createCmnt)
 router.delete('/comment/:id', deleteCmnt)
 router.put('/comment/:id', updateCmnt)
 router.use(handleServerError)
