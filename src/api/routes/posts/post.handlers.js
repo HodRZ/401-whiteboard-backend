@@ -1,12 +1,16 @@
 'use strict'
 
-const { Post } = require('../../../models')
+const { Post, commentModel } = require('../../../models')
 
-async function getPost(req, res) {
-    let post = await Post.findAll();
-    res.status(200).send({
-        post
-    })
+async function getPost(req, res, next) {
+    try {
+        const post = await Post.get();
+        res.status(200).send({
+            post
+        })
+    } catch (e) {
+        next(e)
+    }
 };
 
 async function createPost(req, res, next) {
@@ -20,9 +24,7 @@ async function createPost(req, res, next) {
 async function getPostById(req, res, next) {
     const id = req.params.id;
     try {
-        const post = await Post.findOne({
-            where: { id: id }
-        });
+        const post = await Post.get(id);
         res.status(200).json(post)
     } catch (err) { next(err) }
 };
@@ -30,10 +32,7 @@ async function getPostById(req, res, next) {
 async function deletePost(req, res, next) {
     const id = req.params.id;
     try {
-        let deletedPost = await Post.destroy({
-            where: { id: id },
-            returning: true
-        });
+        let deletedPost = await Post.delete(id)
         res.status(204).json({ deletedPost });
     } catch (err) {
         next(err)
@@ -44,13 +43,18 @@ async function updatePost(req, res, next) {
     const id = req.params.id;
     const post = req.body;
     try {
-        const updatedPost = await Post.update(post, {
-            where: { id: id },
-            returning: true,
-            plain: true
-        });
+        const updatedPost = await Post.update(id, post)
         res.status(200).json(updatedPost);
     } catch (err) { next(err) }
+}
+
+async function populate(req, res, next) {
+    const { filter } = req.query
+    try {
+        const populatedPosts = await Post.populate(filter)
+        res.status(200).json(populatedPosts);
+    } catch (err) { next(err) }
+
 }
 
 module.exports = {
@@ -58,5 +62,6 @@ module.exports = {
     createPost,
     getPostById,
     deletePost,
-    updatePost
+    updatePost,
+    populate
 }
