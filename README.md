@@ -46,5 +46,5 @@ this app uses the **PERN Stack**
   - Add error handlers
 
 - 1.2.1
-  - Fix workflow file
+  - Add env to workflow
  <!-- ## Credit and Collaborations -->
