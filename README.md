@@ -47,4 +47,10 @@ this app uses the **PERN Stack**
 
 - 1.2.1
   - Add env to workflow
+
+- 1.3.0
+  - Add comments model
+  - Associated comments with posts
+  - Add routes collection
+  - Update existing routes to use collection
  <!-- ## Credit and Collaborations -->
