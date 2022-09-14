@@ -23,8 +23,9 @@ async function createPost(req, res, next) {
 
 async function getPostById(req, res, next) {
     const id = req.params.id;
+    const { filter } = req.query
     try {
-        const post = await Post.get(id);
+        const post = await Post.getPopulated(id, filter);
         res.status(200).json(post)
     } catch (err) { next(err) }
 };

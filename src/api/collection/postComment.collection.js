@@ -18,6 +18,20 @@ class postCommentRoutes {
         }
     }
 
+    async getPopulated(id, args) {
+        try {
+            return await this.model.findOne({
+                where: {
+                    id
+                },
+                include: [args]
+            })
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
+
     async create(data) {
         try {
             return await this.model.create(data)
