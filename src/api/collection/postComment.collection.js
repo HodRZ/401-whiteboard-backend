@@ -6,19 +6,15 @@ class postCommentRoutes {
         this.model = model;
     }
 
-    async get(id) {
+    async get(next) {
         try {
-            if (id) {
-                return await this.model.findOne({ where: { id } })
-            } else {
-                return await this.model.findAll()
-            }
+            return await this.model.findAll()
         } catch (e) {
-            console.error(e)
+            next(e)
         }
     }
 
-    async getPopulated(id, args) {
+    async getPopulated(id, next, args) {
         try {
             return await this.model.findOne({
                 where: {
@@ -27,19 +23,20 @@ class postCommentRoutes {
                 include: [args]
             })
         } catch (e) {
-            console.error(e)
+            next(e)
         }
     }
 
 
-    async create(data) {
+    async create(data, next) {
         try {
             return await this.model.create(data)
         } catch (e) {
-            console.error(e)
+            next(e)
         };
     }
-    async update(id, data) {
+
+    async update(id, data, next) {
         try {
             return await this.model.update(data, {
                 where: { id },
@@ -47,25 +44,25 @@ class postCommentRoutes {
                 plain: true
             })
         } catch (e) {
-            console.error(e)
+            next(e)
         };
     }
-    async delete(id) {
+    async delete(id, next) {
         try {
             return await this.model.destroy({
                 where: { id },
                 returning: true
             })
         } catch (e) {
-            console.error(e);
+            next(e);
         }
     }
 
-    async populate(args) {
+    async populate(next, args) {
         try {
             return await this.model.findAll({ include: [args] })
         } catch (e) {
-            console.error(e)
+            next(e)
         }
     }
 }
