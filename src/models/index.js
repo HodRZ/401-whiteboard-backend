@@ -5,7 +5,10 @@ const { post } = require('./post.model');
 const { comment } = require('./comment.model');
 const { postCommentRoutes } = require('../api/collection/postComment.collection');
 
-const sequelize = new Sequelize(DATABASE_URL, sequelizeOption)
+const sequelize = new Sequelize(
+    DATABASE_URL,
+    sequelizeOption
+)
 const postModel = post(sequelize, DataTypes)
 const commentModel = comment(sequelize, DataTypes)
 
