@@ -5,7 +5,7 @@ const { Post, commentModel } = require('../../../models')
 async function getPost(req, res, next) {
     try {
         const post = await Post.get();
-        res.status(200).send({
+        res.status(200).json({
             post
         })
     } catch (e) {
@@ -17,7 +17,7 @@ async function createPost(req, res, next) {
     const newPost = req.body;
     try {
         const post = await Post.create(newPost);
-        res.status(201).send(post);
+        res.status(201).json(post);
     } catch (err) { next(err) }
 };
 
