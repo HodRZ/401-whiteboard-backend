@@ -78,7 +78,6 @@ describe('/Post Routes', () => {
             const { id, img } = addedPost.body
             const updated = await request.put(`/post/${id}`).send(editedPost)
             expect(img).toEqual(updated.image)
-            console.log(updated.body)
             await request.delete(`/post/${id}`);
         });
     });
