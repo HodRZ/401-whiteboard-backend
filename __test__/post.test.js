@@ -67,17 +67,17 @@ describe('/Post Routes', () => {
         it('should update a post', async () => {
             const newPost = {
                 "title": "test put",
-                "content": "this is a test from jest",
-                "image": "jest testing"
+                "content": "this is a test from jest"
             }
             const editedPost = {
-                "title": "edited from server.test",
                 "content": "edited from jest"
             }
             const addedPost = await request.post('/post').send(newPost);
-            const { id, img } = addedPost.body
+            const { id, title } = addedPost.body
             const updated = await request.put(`/post/${id}`).send(editedPost)
-            expect(img).toEqual(updated.image)
+            expect(updated.body[1][0].id).toEqual(id)
+            expect(updated.body[1][0].title).toEqual(title)
+            expect(updated.body[1][0].content).toEqual('edited from jest')
             await request.delete(`/post/${id}`);
         });
     });

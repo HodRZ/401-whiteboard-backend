@@ -40,8 +40,7 @@ class postCommentRoutes {
         try {
             return await this.model.update(data, {
                 where: { id },
-                returning: true,
-                plain: true
+                returning: true
             })
         } catch (e) {
             next(e)
