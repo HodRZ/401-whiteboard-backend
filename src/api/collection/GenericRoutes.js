@@ -41,7 +41,6 @@ class GenericRoutes {
 
     async create(data, next) {
         try {
-            console.log(data)
             return await this.model.create(data)
         } catch (e) {
             next(e)

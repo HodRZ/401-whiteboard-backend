@@ -24,7 +24,7 @@ const commentModel = comment(sequelize, DataTypes, zlib)
 // commentModel.belongsTo(userModel, { as: 'author' })
 
 postModel.hasMany(commentModel, { as: 'comments' })
-commentModel.belongsTo(postModel, { as: 'post' })
+commentModel.belongsTo(postModel)
 
 const userCollection = new GenericRoutes(userModel)
 const postCollection = new GenericRoutes(postModel)
