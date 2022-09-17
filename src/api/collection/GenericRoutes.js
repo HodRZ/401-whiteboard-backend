@@ -1,7 +1,7 @@
 'use strict'
 
 
-class postCommentRoutes {
+class GenericRoutes {
     constructor(model) {
         this.model = model;
     }
@@ -15,21 +15,33 @@ class postCommentRoutes {
     }
 
     async getPopulated(id, next, args) {
-        try {
-            return await this.model.findOne({
-                where: {
-                    id
-                },
-                include: [args]
-            })
-        } catch (e) {
-            next(e)
+        if (args) {
+            try {
+                return await this.model.findOne({
+                    where: { id },
+                    include: args
+                })
+            } catch (e) {
+                next(e)
+            }
+        } else {
+            try {
+                return await this.model.findOne({
+                    where: {
+                        id
+                    }
+                })
+            } catch (e) {
+                next(e)
+            }
+
         }
     }
 
 
     async create(data, next) {
         try {
+            console.log(data)
             return await this.model.create(data)
         } catch (e) {
             next(e)
@@ -59,10 +71,10 @@ class postCommentRoutes {
 
     async populate(next, args) {
         try {
-            return await this.model.findAll({ include: [args] })
+            return await this.model.findAll({ include: args })
         } catch (e) {
             next(e)
         }
     }
 }
-module.exports = { postCommentRoutes }
+module.exports = { GenericRoutes }

@@ -5,7 +5,7 @@ const { Cmnt } = require('../../../models')
 async function getCmnt(req, res, next) {
     try {
         const comments = await Cmnt.get();
-        res.status(200).send({
+        res.status(200).json({
             comments
         })
     } catch (e) {
@@ -14,12 +14,12 @@ async function getCmnt(req, res, next) {
 };
 
 async function createCmnt(req, res, next) {
-    const postId = req.params.id
-    req.body.postId = postId
+    const PostId = req.params.id
+    req.body.PostId = PostId
     const newCmnt = req.body;
     try {
         const comment = await Cmnt.create(newCmnt);
-        res.status(201).send(comment);
+        res.status(201).json(comment);
     } catch (err) { next(err) }
 };
 
