@@ -4,9 +4,9 @@
 
 **Github**: [HodRZ](https://github.com/HodRZ)
 
-**Version**: 1.0.0
+**Version**: 1.4.0
 
-**Frontend repo**: TBA
+**Frontend repo**: [here](https://github.com/HodRZ/401-whiteboard-frontend)
 
 **Live Url** : [whiteboard](https://whiteboard-hod.herokuapp.com/)
 
@@ -53,4 +53,7 @@ this app uses the **PERN Stack**
   - Associated comments with posts
   - Add routes collection
   - Update existing routes to use collection
+
+- 1.4.0
+  - Add User model and routes
  <!-- ## Credit and Collaborations -->
