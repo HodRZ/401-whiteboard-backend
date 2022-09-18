@@ -10,7 +10,8 @@ const User = (sequelize, DataTypes, zlib, bcrypt) => sequelize.define('User', {
         type: DataTypes.STRING,
         validate: {
             isEmail: true
-        }
+        },
+        allowNull: false
     },
     birthday: {
         type: DataTypes.DATEONLY,
@@ -20,14 +21,14 @@ const User = (sequelize, DataTypes, zlib, bcrypt) => sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: true
     },
-    // password: {
-    //     type: DataTypes.STRING,
-    //     allowNull: false,
-    //     set(value) {
-    //         const hashed = bcrypt.hashSync(value, 12)
-    //         this.setDataValue('password', hashed)
-    //     }
-    // },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        set(value) {
+            const hashed = bcrypt.hashSync(value, 12)
+            this.setDataValue('password', hashed)
+        }
+    },
     about: {
         type: DataTypes.STRING,
         set(data) {

@@ -2,9 +2,7 @@
 
 const cors = require('cors')
 const morgan = require('morgan')
-const postRoute = require('./api/routes/posts/post.routes')
-const commentRoute = require('./api/routes/comments/comment.routes')
-const userRoute = require('./api/routes/user/user.routes')
+const { postRoute, commentRoute, userRoutes, signinRoute } = require('./api/routes')
 const { express } = require('./config')
 const app = express()
 
@@ -13,7 +11,8 @@ app.use(morgan('tiny'))
 app.use(express.json())
 app.use(postRoute)
 app.use(commentRoute)
-app.use(userRoute)
+app.use(userRoutes)
+app.use(signinRoute)
 
 function radio(port) {
     app.listen(port, (req, res) => {

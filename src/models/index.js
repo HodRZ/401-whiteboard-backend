@@ -17,11 +17,11 @@ const userModel = User(sequelize, DataTypes, zlib, bcrypt)
 const postModel = post(sequelize, DataTypes, zlib)
 const commentModel = comment(sequelize, DataTypes, zlib)
 
-// userModel.hasMany(postModel, { as: 'post' })
-// postModel.belongsTo(userModel, { as: 'author' })
+userModel.hasMany(postModel, { as: 'posts' })
+postModel.belongsTo(userModel)
 
-// userModel.hasMany(commentModel, { as: 'comments' })
-// commentModel.belongsTo(userModel, { as: 'author' })
+userModel.hasMany(commentModel, { as: 'comments' })
+commentModel.belongsTo(userModel)
 
 postModel.hasMany(commentModel, { as: 'comments' })
 commentModel.belongsTo(postModel)
@@ -35,5 +35,6 @@ module.exports = {
     Post: postCollection,
     Cmnt: commentCollection,
     User: userCollection,
-    commentModel: commentModel
+    commentModel,
+    userModel
 }
