@@ -7,6 +7,7 @@ const morgan = require('morgan')
 const cors = require('cors')
 const omit = require('lodash/omit')
 const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser')
 
 module.exports = {
     bcrypt,
@@ -16,5 +17,6 @@ module.exports = {
     morgan,
     cors,
     omit,
-    jwt
+    jwt,
+    cookieParser
 }

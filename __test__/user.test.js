@@ -33,7 +33,7 @@ describe('User', () => {
             const addedUser = await request.post('/signup').send(newUser);
             const userData = {
                 "email": "hodjestlogin@401.com",
-                "password": "verySafePassword"
+                "password": "verySafePasswordd"
             }
             const encodedCredintial = base64.encode(`${userData.email}:${userData.password}`)
             const loggedIn = await request.post('/signin').set('Authorization', encodedCredintial)
