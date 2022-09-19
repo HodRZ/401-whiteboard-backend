@@ -27,7 +27,7 @@ describe('User', () => {
                 "username": "hod from jest login test",
                 "email": "hodjestlogin@401.com",
                 "birthday": "1990-12-22",
-                "password": "verySafePassword",
+                "password": "verySafePasswordd",
                 "about": "im a super user using a super password from jest"
             }
             const addedUser = await request.post('/signup').send(newUser);
