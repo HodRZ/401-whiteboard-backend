@@ -8,15 +8,15 @@ describe('User', () => {
     describe('User Sign Up', () => {
         it('should create a new accout', async () => {
             const newUser = {
-                "name": "hod from jest",
-                "email": "hodjest@401.com",
+                "username": "hod from jest",
+                "email": "hodjest@406.com",
                 "birthday": "1990-12-22",
                 "password": "verySafePassword",
                 "about": "im a super user using a super password from jest"
             }
             const addedUser = await request.post('/signUp').send(newUser);
             expect(addedUser.status).toEqual(201);
-            expect(addedUser.body.name).toEqual("hod from jest")
+            expect(addedUser.body.username).toEqual("hod from jest")
             const { id } = addedUser.body
             await request.delete(`/user/${id}`)
         });
@@ -24,7 +24,7 @@ describe('User', () => {
     describe('User can login', () => {
         it('should login', async () => {
             const newUser = {
-                "name": "hod from jest login test",
+                "username": "hod from jest login test",
                 "email": "hodjestlogin@401.com",
                 "birthday": "1990-12-22",
                 "password": "verySafePassword",
@@ -38,13 +38,13 @@ describe('User', () => {
             const encodedCredintial = base64.encode(`${userData.email}:${userData.password}`)
             const loggedIn = await request.post('/signin').set('Authorization', encodedCredintial)
             expect(loggedIn.status).toEqual(200)
-            expect(loggedIn.body.name).toEqual('hod from jest login test')
+            expect(loggedIn.body.username).toEqual('hod from jest login test')
             const { id } = addedUser.body
             await request.delete(`/user/${id}`)
         });
         it('should not login with wrong crdintials', async () => {
             const newUser = {
-                "name": "hod from jest login with wrong creds",
+                "username": "hod from jest login with wrong creds",
                 "email": "hodjestLOGIN@402.com",
                 "birthday": "1990-12-22",
                 "password": "verySafePassword",

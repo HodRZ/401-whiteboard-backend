@@ -6,6 +6,8 @@ const helmet = require('helmet')
 const morgan = require('morgan')
 const cors = require('cors')
 const omit = require('lodash/omit')
+const jwt = require('jsonwebtoken')
+
 module.exports = {
     bcrypt,
     zlib,
@@ -13,5 +15,6 @@ module.exports = {
     helmet,
     morgan,
     cors,
-    omit
+    omit,
+    jwt
 }

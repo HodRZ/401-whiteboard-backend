@@ -1,6 +1,6 @@
 'use strict'
 
-const { bcrypt, base64, omit } = require("../../../config/Utils")
+const { bcrypt, base64, omit, jwt } = require("../../../config/Utils")
 const { userModel, User } = require("../../../models")
 
 async function signIn(req, res) {
@@ -13,6 +13,12 @@ async function signIn(req, res) {
         const isAuthenticated = await bcrypt.compare(password, user.password);
         if (isAuthenticated) {
             const authenticated = omit(user, ['password'])
+            const token = jwt.sign({
+                username: user.username,
+                userId: user.id,
+                userEmail: user.email
+            }, process.env.TOKEN_KEY)
+            authenticated.token = token
             return res.status(200).json(authenticated)
         } else {
             return res.status(401).json('Username or Password are incorrect');
