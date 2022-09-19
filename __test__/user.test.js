@@ -25,18 +25,19 @@ describe('User', () => {
         it('should login', async () => {
             const newUser = {
                 "username": "hod from jest login test",
-                "email": "hodjestlogin@401.com",
+                "email": "hodjestlogin@4021.com",
                 "birthday": "1990-12-22",
                 "password": "verySafePasswordd",
                 "about": "im a super user using a super password from jest"
             }
             const addedUser = await request.post('/signup').send(newUser);
             const userData = {
-                "email": "hodjestlogin@401.com",
+                "email": "hodjestlogin@4021.com",
                 "password": "verySafePasswordd"
             }
             const encodedCredintial = base64.encode(`${userData.email}:${userData.password}`)
             const loggedIn = await request.post('/signin').set('Authorization', encodedCredintial)
+            console.log(loggedIn, '==================================')
             expect(loggedIn.status).toEqual(200)
             expect(loggedIn.body.username).toEqual('hod from jest login test')
             const { id } = addedUser.body
