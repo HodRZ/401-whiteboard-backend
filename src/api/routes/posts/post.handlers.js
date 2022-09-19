@@ -9,7 +9,7 @@ async function getPost(req, res, next) {
             post
         })
     } catch (e) {
-        next(e)
+        console.error(e)
     }
 };
 

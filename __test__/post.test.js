@@ -19,10 +19,9 @@ describe('/Post Routes', () => {
             const newPost = {
                 "title": "test get by id",
                 "content": "this is a test from jest",
-                "image": "jest testing"
             }
             const addedPost = await request.post('/post').send(newPost);
-            const { id, img, title } = addedPost.body
+            const { id, title } = addedPost.body
             const res = await request.get(`/post/${id}?filter=comments`);
             expect(res.status).toEqual(200);
             expect(res.body.title).toEqual(title);

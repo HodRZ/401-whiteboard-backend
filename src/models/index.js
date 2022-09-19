@@ -3,24 +3,38 @@ const { sequelizeOption, DATABASE_URL } = require('./../config')
 const { Sequelize, DataTypes } = require('sequelize');
 const { post } = require('./post.model');
 const { comment } = require('./comment.model');
-const { postCommentRoutes } = require('../api/collection/postComment.collection');
+const { GenericRoutes } = require('../api/collection/GenericRoutes');
+const { bcrypt, zlib } = require('../config/Utils');
+const { User } = require('./User.model');
+
 
 const sequelize = new Sequelize(
     DATABASE_URL,
     sequelizeOption
 )
-const postModel = post(sequelize, DataTypes)
-const commentModel = comment(sequelize, DataTypes)
+
+const userModel = User(sequelize, DataTypes, zlib, bcrypt)
+const postModel = post(sequelize, DataTypes, zlib)
+const commentModel = comment(sequelize, DataTypes, zlib)
+
+userModel.hasMany(postModel, { as: 'posts' })
+postModel.belongsTo(userModel)
+
+userModel.hasMany(commentModel, { as: 'comments' })
+commentModel.belongsTo(userModel)
 
 postModel.hasMany(commentModel, { as: 'comments' })
-commentModel.belongsTo(postModel, { as: 'post' })
+commentModel.belongsTo(postModel)
 
-const postCollection = new postCommentRoutes(postModel)
-const commentCollection = new postCommentRoutes(commentModel)
+const userCollection = new GenericRoutes(userModel)
+const postCollection = new GenericRoutes(postModel)
+const commentCollection = new GenericRoutes(commentModel)
 
 module.exports = {
     sequelize,
     Post: postCollection,
     Cmnt: commentCollection,
-    commentModel: commentModel
+    User: userCollection,
+    commentModel,
+    userModel
 }
