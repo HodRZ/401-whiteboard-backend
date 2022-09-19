@@ -13,13 +13,6 @@ async function getUser(req, res, next) {
     }
 };
 
-async function createUser(req, res, next) {
-    const newUser = req.body;
-    try {
-        const user = await User.create(newUser, next);
-        res.status(201).json(user);
-    } catch (err) { next(err) }
-};
 
 async function getUserById(req, res, next) {
     const id = req.params.id;
@@ -60,7 +53,6 @@ async function populate(req, res, next) {
 
 module.exports = {
     getUser,
-    createUser,
     getUserById,
     deleteUser,
     updateUser,

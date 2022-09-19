@@ -56,4 +56,5 @@ this app uses the **PERN Stack**
 
 - 1.4.0
   - Add User model and routes
+  - Add basic authentication
  <!-- ## Credit and Collaborations -->

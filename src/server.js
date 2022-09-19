@@ -1,14 +1,18 @@
 'use strict'
 
-const cors = require('cors')
-const morgan = require('morgan')
 const { postRoute, commentRoute, userRoutes, signinRoute } = require('./api/routes')
 const { express } = require('./config')
+const { morgan, cors, helmet } = require('./config/Utils')
 const app = express()
 
 app.use(cors())
 app.use(morgan('tiny'))
+app.use(helmet({
+    contentSecurityPolicy: false,
+}))
 app.use(express.json())
+
+
 app.use(postRoute)
 app.use(commentRoute)
 app.use(userRoutes)

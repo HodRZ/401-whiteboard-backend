@@ -11,7 +11,6 @@ router.get('/user', getUser);
 router.get('/user/:id', getUserById)
 router.get('/userAll', populate)
 router.use(handleNotFound)
-router.post('/user', createUser)
 router.delete('/user/:id', deleteUser)
 router.put('/user/:id', updateUser)
 router.use(handleServerError)
