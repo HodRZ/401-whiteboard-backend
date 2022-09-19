@@ -4,6 +4,11 @@ const { request } = require('./../src/config/test-config')
 describe('/Post Routes', () => {
     describe('Get all', () => {
         it('should get all data from db', async () => {
+            const newPost = {
+                "title": "test get by id",
+                "content": "this is a test from jest",
+            }
+            const addedPost = await request.post('/post').send(newPost);
             const res = await request.get(`/post`);
             expect(res.status).toEqual(200);
             expect(res.body).toBeDefined();
