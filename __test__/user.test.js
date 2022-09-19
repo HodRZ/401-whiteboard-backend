@@ -37,7 +37,6 @@ describe('User', () => {
             }
             const encodedCredintial = base64.encode(`${userData.email}:${userData.password}`)
             const loggedIn = await request.post('/signin').set('Authorization', encodedCredintial)
-            console.log(loggedIn, '==================================')
             expect(loggedIn.status).toEqual(200)
             expect(loggedIn.body.username).toEqual('hod from jest login test')
             const { id } = addedUser.body
