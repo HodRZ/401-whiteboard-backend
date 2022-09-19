@@ -24,6 +24,7 @@ async function signIn(req, res) {
 
 async function signUp(req, res, next) {
     const newUser = req.body;
+    newUser.email = newUser.email.toLowerCase()
     const email = newUser.email
     const user = await userModel.findOne({ where: { email }, raw: true, })
     if (!user) {
@@ -31,7 +32,7 @@ async function signUp(req, res, next) {
         const addedUser = omit(createdUser.dataValues, ['password'])
         res.status(201).json(addedUser);
     } else {
-        return res.status(401).json('Username already exist');
+        return res.status(401).json('Email already exist');
     }
 }
 
