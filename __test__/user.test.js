@@ -45,14 +45,14 @@ describe('User', () => {
         it('should not login with wrong crdintials', async () => {
             const newUser = {
                 "name": "hod from jest login with wrong creds",
-                "email": "hodjestlogin@401.com",
+                "email": "hodjestLOGIN@402.com",
                 "birthday": "1990-12-22",
                 "password": "verySafePassword",
                 "about": "im a super user using a super password from jest"
             }
             const addedUser = await request.post('/signup').send(newUser);
             const userData = {
-                "email": "hodjestlogin@401.com",
+                "email": "hodjestlogin@402.com",
                 "password": "verySafePasswo"
             }
             const encodedCredintial = base64.encode(`${userData.email}:${userData.password}`)
