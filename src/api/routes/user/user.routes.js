@@ -8,7 +8,7 @@ const router = express.Router()
 
 
 
-router.get('/user', validateToken, getUser);
+router.get('/user', getUser);
 router.get('/user/:id', getUserById)
 router.get('/userAll', populate)
 router.use(handleNotFound)
