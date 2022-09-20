@@ -37,8 +37,12 @@ const User = (sequelize, DataTypes, zlib, bcrypt) => sequelize.define('User', {
         },
         get() {
             const data = this.getDataValue('about');
-            const inflated = zlib.inflateSync(Buffer.from(data, 'base64')).toString();
-            return inflated
+            if (data) {
+                const inflated = zlib.inflateSync(Buffer.from(data, 'base64'));
+                return inflated.toString()
+            } else {
+                return '--'
+            }
 
         }
 

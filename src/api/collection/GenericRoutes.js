@@ -31,8 +31,7 @@ class GenericRoutes {
                 return await this.model.findOne({
                     where: {
                         id
-                    },
-                    raw: true
+                    }
                 })
             } catch (e) {
                 next(e)
