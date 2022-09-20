@@ -1,48 +1,41 @@
 'use strict'
 
 const { AC_TOKEN } = require("../../../config");
-const { bcrypt, base64, omit, jwt } = require("../../../config/Utils")
-const { userModel, User } = require("../../../models")
+const { omit, jwt } = require("../../../config/Utils")
+const { User } = require("../../../models")
 
 async function signIn(req, res) {
-    const authHeader = req.headers.authorization.split(' ');
-    const encodedValue = authHeader.pop();
-    const decodedValue = base64.decode(encodedValue);
-    const [email, password] = decodedValue.split(':');
-    const user = await userModel.findOne({ where: { email }, raw: true, })
-    if (user) {
-        const isAuthenticated = await bcrypt.compare(password, user.password);
-        if (isAuthenticated) {
-            const authenticated = omit(user, ['password'])
-            const token = jwt.sign({
-                username: user.username,
-                userId: user.id,
-                userEmail: user.email
-            }, AC_TOKEN, { expiresIn: 900000 })
-            return res.status(200)
-                .cookie('access-token', token, {
-                    httpOnly: true
-                })
-                .json(authenticated)
-        } else {
-            return res.status(401).json('Username or Password are incorrect');
-        }
-    } else {
+    try {
+        const user = req.body
+        const token = jwt.sign({
+            username: user.username,
+            userId: user.id,
+            userEmail: user.email
+        }, AC_TOKEN, { expiresIn: 900000 })
+        return res.status(200)
+            .cookie('access-token', token)
+            .json(user)
+    } catch (e) {
         return res.status(401).json('Username or Password are incorrect');
     }
 }
 
 async function signUp(req, res, next) {
-    const newUser = req.body;
-    newUser.email = newUser.email.toLowerCase()
-    const email = newUser.email
-    const user = await userModel.findOne({ where: { email }, raw: true, })
-    if (!user) {
+    try {
+        const newUser = req.body;
         const createdUser = await User.create(newUser, next);
         const addedUser = omit(createdUser.dataValues, ['password'])
-        res.status(201).json(addedUser);
-    } else {
-        return res.status(401).json('Email already exist');
+        const token = jwt.sign({
+            username: addedUser.username,
+            userId: addedUser.id,
+            userEmail: addedUser.email
+        }, AC_TOKEN, { expiresIn: 900000 })
+        return res.status(201)
+            .cookie('access-token', token)
+            .json(addedUser);
+
+    } catch (e) {
+        next(e)
     }
 }
 
