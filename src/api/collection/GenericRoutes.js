@@ -8,7 +8,9 @@ class GenericRoutes {
 
     async get(next) {
         try {
-            return await this.model.findAll()
+            return await this.model.findAll({
+                attributes: { exclude: ['password'] }
+            })
         } catch (e) {
             next(e)
         }

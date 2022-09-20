@@ -9,7 +9,7 @@ describe('User', () => {
         it('should create a new accout', async () => {
             const newUser = {
                 "username": "hod from jest",
-                "email": "hodjest@406.com",
+                "email": "hodjest@40.com",
                 "birthday": "1990-12-22",
                 "password": "verySafePassword",
                 "about": "im a super user using a super password from jest"
