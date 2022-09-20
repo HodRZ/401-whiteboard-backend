@@ -3,7 +3,7 @@
 const { userModel } = require('../../../models');
 const { omit, base64, bcrypt } = require('./../../../config/Utils')
 
-async function validateUser(req, res, next) {
+async function validateNewUser(req, res, next) {
     try {
         const authHeader = req.headers.authorization.split(' ');
         const encodedValue = authHeader.pop();
@@ -27,5 +27,5 @@ async function validateUser(req, res, next) {
 }
 
 module.exports = {
-    validateUser
+    validateNewUser
 }
