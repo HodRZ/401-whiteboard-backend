@@ -18,10 +18,16 @@ class GenericRoutes {
 
     async getPopulated(id, next, args) {
         if (args) {
+            const data = args.map((model) => {
+                return {
+                    association: model,
+                    attributes: { exclude: ['password'] }
+                }
+            })
             try {
                 return await this.model.findOne({
                     where: { id },
-                    include: args
+                    include: [...data]
                 })
             } catch (e) {
                 next(e)
@@ -29,9 +35,13 @@ class GenericRoutes {
         } else {
             try {
                 return await this.model.findOne({
-                    where: {
-                        id
-                    }
+                    where: { id },
+                    include: {
+                        all: true,
+                        nested: true,
+                    },
+                    attributes: { exclude: ['password'] }
+
                 })
             } catch (e) {
                 next(e)
@@ -71,8 +81,29 @@ class GenericRoutes {
     }
 
     async populate(next, args) {
+        if (args) {
+            const data = args.map((model) => {
+                return {
+                    association: model,
+                    attributes: { exclude: ['password'] }
+                }
+            })
+            try {
+                return await this.model.findAll({
+                    include: [...data],
+                })
+            } catch (e) {
+                next(e)
+            }
+        }
         try {
-            return await this.model.findAll({ include: args })
+            return await this.model.findAll({
+                include: {
+                    all: true,
+                    nested: true,
+                    attributes: { exclude: ['password'] }
+                }
+            })
         } catch (e) {
             next(e)
         }

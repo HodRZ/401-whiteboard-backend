@@ -4,7 +4,7 @@
 
 **Github**: [HodRZ](https://github.com/HodRZ)
 
-**Version**: 1.4.0
+**Version**: 2.0.0
 
 **Frontend repo**: [here](https://github.com/HodRZ/401-whiteboard-frontend)
 
@@ -58,4 +58,7 @@ this app uses the **PERN Stack**
   - Add User model and routes
   - Add basic authentication
   - Add tokenization
+
+- 2.0.0
+  - Update routes controllers and middlewares
  <!-- ## Credit and Collaborations -->

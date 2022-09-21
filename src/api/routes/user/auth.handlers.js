@@ -11,9 +11,9 @@ async function signIn(req, res) {
             username: user.username,
             userId: user.id,
             userEmail: user.email
-        }, AC_TOKEN, { expiresIn: 900000 })
+        }, AC_TOKEN, { expiresIn: "1H" })
+        user.token = token
         return res.status(200)
-            .cookie('access-token', token)
             .json(user)
     } catch (e) {
         return res.status(401).json('Username or Password are incorrect');
@@ -29,9 +29,9 @@ async function signUp(req, res, next) {
             username: addedUser.username,
             userId: addedUser.id,
             userEmail: addedUser.email
-        }, AC_TOKEN, { expiresIn: 900000 })
+        }, AC_TOKEN)
+        addedUser.token = token
         return res.status(201)
-            .cookie('access-token', token)
             .json(addedUser);
 
     } catch (e) {

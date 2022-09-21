@@ -27,7 +27,7 @@ describe('/Post Routes', () => {
             }
             const addedPost = await request.post('/post').send(newPost);
             const { id, title } = addedPost.body
-            const res = await request.get(`/post/${id}?filter=comments`);
+            const res = await request.get(`/post/${id}`);
             expect(res.status).toEqual(200);
             expect(res.body.title).toEqual(title);
             await request.delete(`/post/${id}`);
