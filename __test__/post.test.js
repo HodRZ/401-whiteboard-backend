@@ -5,7 +5,7 @@ describe('/Post Routes', () => {
     describe('Get all', () => {
         it('should get all data from db', async () => {
             const newPost = {
-                "title": "test get by id",
+                "title": "test get all",
                 "content": "this is a test from jest",
             }
             const addedPost = await request.post('/post').send(newPost);
@@ -13,7 +13,7 @@ describe('/Post Routes', () => {
             expect(res.status).toEqual(200);
             expect(res.body).toBeDefined();
             const { id } = addedPost.body
-            await request.delete(`/post/${res.body.id}`);
+            await request.delete(`/post/${id}`);
         });
         it('Get all error handler', async () => {
             const res = await request.get(`/posts/`);
