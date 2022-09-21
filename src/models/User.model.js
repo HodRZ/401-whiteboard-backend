@@ -30,7 +30,7 @@ const User = (sequelize, DataTypes, zlib, bcrypt) => sequelize.define('User', {
         }
     },
     about: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         set(data) {
             const deflated = zlib.deflateSync(data).toString('base64')
             this.setDataValue('about', deflated)
