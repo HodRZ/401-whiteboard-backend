@@ -102,7 +102,8 @@ class GenericRoutes {
                     all: true,
                     nested: true,
                     attributes: { exclude: ['password'] }
-                }
+                },
+                attributes: { exclude: ['password'] }
             })
         } catch (e) {
             next(e)
