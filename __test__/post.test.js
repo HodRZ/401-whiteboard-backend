@@ -12,6 +12,8 @@ describe('/Post Routes', () => {
             const res = await request.get(`/post`);
             expect(res.status).toEqual(200);
             expect(res.body).toBeDefined();
+            const { id } = addedPost.body
+            await request.delete(`/post/${res.body.id}`);
         });
         it('Get all error handler', async () => {
             const res = await request.get(`/posts/`);
