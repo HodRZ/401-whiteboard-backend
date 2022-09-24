@@ -4,11 +4,11 @@
 
 **Github**: [HodRZ](https://github.com/HodRZ)
 
-**Version**: 1.0.0
+**Version**: 2.0.0
 
-**Frontend repo**: TBA
+**Frontend repo**: [here](https://github.com/HodRZ/401-whiteboard-frontend)
 
-**Live Url** : to be released
+**Live Url** : [whiteboard](https://whiteboard-hod.herokuapp.com/)
 
 ## Overview
 
@@ -30,4 +30,35 @@ this app uses the **PERN Stack**
 
 - 1.0.0 : add app basic skeleton and dependencies
 
+- 1.1.0 :
+  - add routing for */post* endpoint
+  - add connection to DB
+
+- 1.1.1
+  - Fix .env variables
+  - Fix SSL for herkou deployment
+
+- 1.1.2
+  - Fix env varriables to connect to remote DB
+  - Used **delete (/post)** to clean the database after testing
+
+- 1.2.0
+  - Add error handlers
+
+- 1.2.1
+  - Add env to workflow
+
+- 1.3.0
+  - Add comments model
+  - Associated comments with posts
+  - Add routes collection
+  - Update existing routes to use collection
+
+- 1.4.0
+  - Add User model and routes
+  - Add basic authentication
+  - Add tokenization
+
+- 2.0.0
+  - Update routes controllers and middlewares
  <!-- ## Credit and Collaborations -->

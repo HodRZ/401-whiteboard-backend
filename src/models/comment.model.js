@@ -1,10 +1,6 @@
 'use strict'
 
-const post = (sequelize, DataTypes, zlib) => sequelize.define('Post', {
-    title: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
+const comment = (sequelize, DataTypes, zlib) => sequelize.define('Comment', {
     content: {
         type: DataTypes.TEXT,
         allowNull: false,
@@ -20,4 +16,4 @@ const post = (sequelize, DataTypes, zlib) => sequelize.define('Post', {
     }
 })
 
-module.exports = { post }
+module.exports = { comment }
