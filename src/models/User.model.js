@@ -11,7 +11,11 @@ const User = (sequelize, DataTypes, zlib, bcrypt) => sequelize.define('User', {
         validate: {
             isEmail: true
         },
-        allowNull: false
+        allowNull: false,
+        set(data) {
+            const sanitized = data.toLowerCase()
+            this.setDataValue('email', sanitized)
+        }
     },
     birthday: {
         type: DataTypes.DATEONLY,
@@ -45,8 +49,12 @@ const User = (sequelize, DataTypes, zlib, bcrypt) => sequelize.define('User', {
             }
 
         }
+    },
+    refresh_token: {
+        type: DataTypes.TEXT,
 
     }
+
 })
 
 module.exports = { User }

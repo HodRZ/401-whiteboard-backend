@@ -3,10 +3,12 @@
 const { validateUserCred } = require("./validate-new-user")
 const { validateToken } = require("./validate-token")
 const { isEmailUnique } = require('./check-existing-email')
+const { addRefreshToken } = require('./add_refresh_token')
 
 
 module.exports = {
     isEmailUnique,
     validateUserCred,
-    validateToken
+    validateToken,
+    addRefreshToken
 }

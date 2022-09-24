@@ -5,7 +5,16 @@ const { express } = require('./config')
 const { morgan, cors, helmet, cookieParser } = require('./config/Utils')
 const app = express()
 
-app.use(cors())
+
+//-TODO: 
+//- add cors policy
+//- add refresh token route and controller 
+
+
+app.use(cors({
+    credentials: true,
+    origin: 'http://localhost:3000'
+}))
 app.use(morgan('tiny'))
 app.use(helmet({
     contentSecurityPolicy: false,

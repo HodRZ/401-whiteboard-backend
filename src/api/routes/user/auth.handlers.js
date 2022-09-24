@@ -2,7 +2,8 @@
 
 const { AC_TOKEN } = require("../../../config");
 const { omit, jwt } = require("../../../config/Utils")
-const { User } = require("../../../models")
+const { User } = require("../../../models");
+const { addRefreshToken } = require("../../middlewares/auth");
 
 async function signIn(req, res) {
     try {
@@ -29,9 +30,18 @@ async function signUp(req, res, next) {
             username: addedUser.username,
             userId: addedUser.id,
             userEmail: addedUser.email
-        }, AC_TOKEN)
+        }, AC_TOKEN, { expiresIn: '10m' })
+        const refresh_token = addRefreshToken({
+            userId: addedUser.id,
+            userEmail: addedUser.email
+        })
+
         addedUser.token = token
+        await createdUser.update({ refresh_token })
         return res.status(201)
+            .cookie('refresh_token', refresh_token, {
+                httpOnly: true
+            })
             .json(addedUser);
 
     } catch (e) {
