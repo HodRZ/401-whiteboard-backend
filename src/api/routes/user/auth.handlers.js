@@ -40,7 +40,9 @@ async function signUp(req, res, next) {
         await createdUser.update({ refresh_token })
         return res.status(201)
             .cookie('refresh_token', refresh_token, {
-                httpOnly: true
+                httpOnly: true,
+                secure: true,
+                maxAge: 3 * 60 * 60 * 1000
             })
             .json(addedUser);
 
