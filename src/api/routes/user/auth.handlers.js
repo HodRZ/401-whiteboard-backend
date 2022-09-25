@@ -15,6 +15,11 @@ async function signIn(req, res) {
         }, AC_TOKEN, { expiresIn: "1H" })
         user.token = token
         return res.status(200)
+            .cookie('refresh_token', user.refresh_token, {
+                httpOnly: true,
+                // secure: true,
+                maxAge: 3 * 60 * 60 * 1000
+            })
             .json(user)
     } catch (e) {
         return res.status(401).json('Username or Password are incorrect');
@@ -41,7 +46,7 @@ async function signUp(req, res, next) {
         return res.status(201)
             .cookie('refresh_token', refresh_token, {
                 httpOnly: true,
-                secure: true,
+                // secure: true,
                 maxAge: 3 * 60 * 60 * 1000
             })
             .json(addedUser);

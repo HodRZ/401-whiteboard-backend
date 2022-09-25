@@ -2,7 +2,7 @@
 
 const { postRoute, commentRoute, userRoutes, signinRoute } = require('./api/routes')
 const { express } = require('./config')
-const { morgan, cors, helmet, cookieParser } = require('./config/Utils')
+const { morgan, cors, helmet } = require('./config/Utils')
 const app = express()
 
 
@@ -14,14 +14,13 @@ const app = express()
 
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:3000'
+    origin: ['http://localhost:3000', 'https://401-whiteboard.netlify.app']
 }))
 app.use(morgan('tiny'))
 app.use(helmet({
     contentSecurityPolicy: false,
 }))
 app.use(express.json())
-app.use(cookieParser())
 
 
 app.use(postRoute)
