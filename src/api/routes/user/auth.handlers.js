@@ -21,7 +21,8 @@ async function signIn(req, res) {
         return res.status(200)
             .cookie('refresh_token', refresh_token, {
                 httpOnly: true,
-                // secure: true,
+                secure: true,
+                sameSite: 'None',
                 maxAge: 3 * 60 * 60 * 1000
             })
             .json(user)
@@ -49,7 +50,8 @@ async function signUp(req, res, next) {
         return res.status(201)
             .cookie('refresh_token', refresh_token, {
                 httpOnly: true,
-                // secure: true,
+                secure: true,
+                sameSite: 'None',
                 maxAge: 3 * 60 * 60 * 1000
             })
             .json(addedUser);
@@ -84,7 +86,8 @@ async function refreshSignIn(req, res, next) {
         return res.status(201)
             .cookie('refresh_token', refresh_token, {
                 httpOnly: true,
-                // secure: true,
+                secure: true,
+                sameSite: 'None',
                 maxAge: 3 * 60 * 60 * 1000
             })
             .json(user);
