@@ -12,16 +12,16 @@ const app = express()
 //- compare users using refresh token
 
 
+app.use(cookieParser())
 app.use(cors({
+    origin: ['http://localhost:3000', 'https://401-whiteboard.netlify.app'],
     credentials: true,
-    origin: ['http://localhost:3000', 'https://401-whiteboard.netlify.app']
 }))
 app.use(morgan('tiny'))
 app.use(helmet({
     contentSecurityPolicy: false,
 }))
 app.use(express.json())
-app.use(cookieParser())
 
 
 app.use(postRoute)
