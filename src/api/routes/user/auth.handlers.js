@@ -2,7 +2,7 @@
 
 const { AC_TOKEN } = require("../../../config");
 const { omit, jwt } = require("../../../config/Utils")
-const { User } = require("../../../models");
+const { User, userModel } = require("../../../models");
 const { addRefreshToken } = require("../../middlewares/auth");
 
 async function signIn(req, res) {
@@ -13,9 +13,13 @@ async function signIn(req, res) {
             userId: user.id,
             userEmail: user.email
         }, AC_TOKEN, { expiresIn: "1H" })
+        const refresh_token = addRefreshToken({
+            userId: user.id,
+            userEmail: user.email
+        })
         user.token = token
         return res.status(200)
-            .cookie('refresh_token', user.refresh_token, {
+            .cookie('refresh_token', refresh_token, {
                 httpOnly: true,
                 // secure: true,
                 maxAge: 3 * 60 * 60 * 1000
@@ -40,8 +44,7 @@ async function signUp(req, res, next) {
             userId: addedUser.id,
             userEmail: addedUser.email
         })
-
-        addedUser.token = token
+        addedUser.access_token = token
         await createdUser.update({ refresh_token })
         return res.status(201)
             .cookie('refresh_token', refresh_token, {
@@ -56,7 +59,43 @@ async function signUp(req, res, next) {
     }
 }
 
+async function refreshSignIn(req, res, next) {
+    try {
+        const { userId } = req.verified
+        const user = await userModel.findOne({
+            where: { id: userId },
+            attributes: { exclude: ['refresh_token', 'password'] }
+        })
+        const refresh_token = addRefreshToken({
+            userId: user.id,
+            userEmail: user.email
+        })
+        const token = jwt.sign({
+            username: user.username,
+            userId: user.id,
+            userEmail: user.email
+        }, AC_TOKEN, { expiresIn: '30m' })
+        await userModel.update({ refresh_token }, {
+            where: { id: userId },
+            returning: true,
+            attributes: { exclude: ['refresh_token'] }
+        })
+        user.access_token = token
+        return res.status(201)
+            .cookie('refresh_token', refresh_token, {
+                httpOnly: true,
+                // secure: true,
+                maxAge: 3 * 60 * 60 * 1000
+            })
+            .json(user);
+
+    } catch (e) {
+        next(e)
+    }
+}
+
 module.exports = {
     signIn,
-    signUp
+    signUp,
+    refreshSignIn
 }

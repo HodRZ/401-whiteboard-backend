@@ -1,4 +1,6 @@
 'use strict'
+
+const cookieParser = require('cookie-parser')
 const zlib = require('node:zlib')
 const bcrypt = require('bcrypt');
 const base64 = require('base-64')
@@ -16,5 +18,6 @@ module.exports = {
     morgan,
     cors,
     omit,
-    jwt
+    jwt,
+    cookieParser
 }

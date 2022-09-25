@@ -2,7 +2,7 @@
 
 const { postRoute, commentRoute, userRoutes, signinRoute } = require('./api/routes')
 const { express } = require('./config')
-const { morgan, cors, helmet } = require('./config/Utils')
+const { morgan, cors, helmet, cookieParser } = require('./config/Utils')
 const app = express()
 
 
@@ -21,6 +21,7 @@ app.use(helmet({
     contentSecurityPolicy: false,
 }))
 app.use(express.json())
+app.use(cookieParser())
 
 
 app.use(postRoute)

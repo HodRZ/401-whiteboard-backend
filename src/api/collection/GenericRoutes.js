@@ -63,7 +63,8 @@ class GenericRoutes {
         try {
             return await this.model.update(data, {
                 where: { id },
-                returning: true
+                returning: true,
+                attributes: { exclude: ['password', 'refresh_token'] }
             })
         } catch (e) {
             next(e)

@@ -50,9 +50,8 @@ const User = (sequelize, DataTypes, zlib, bcrypt) => sequelize.define('User', {
 
         }
     },
-    refresh_token: {
-        type: DataTypes.TEXT,
-
+    access_token: {
+        type: DataTypes.VIRTUAL
     }
 
 })

@@ -20,9 +20,17 @@ function validateToken(req, res, next) {
 }
 
 function validateRefreshToken(req, res, next) {
-    const refreshToken = req.headers.cookie.split('=').pop()
-    const verified = jwt.verify(refreshToken, REFRESH_TOKEN)
-    next()
+    if (!req.headers.cookie) {
+        next('Not Authorized')
+    }
+    try {
+        const refreshToken = req.cookies.refresh_token
+        const verified = jwt.verify(refreshToken, REFRESH_TOKEN)
+        req.verified = verified
+        next()
+    } catch (e) {
+        next(e)
+    }
 }
 
 module.exports = {
