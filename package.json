@@ -4,9 +4,9 @@
   "description": "a stress-relief cheerful whiteboard for the 401 class (backend)",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose --coverage --detectOpenHandles",
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "test": "jest --verbose --coverage --detectOpenHandles --setupFiles dotenv/config",
+    "start": "node -r dotenv/config index.js",
+    "dev": "nodemon -r dotenv/config index.js"
   },
   "keywords": [],
   "author": "",

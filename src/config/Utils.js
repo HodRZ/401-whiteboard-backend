@@ -1,4 +1,6 @@
 'use strict'
+
+const cookieParser = require('cookie-parser')
 const zlib = require('node:zlib')
 const bcrypt = require('bcrypt');
 const base64 = require('base-64')
@@ -7,7 +9,6 @@ const morgan = require('morgan')
 const cors = require('cors')
 const omit = require('lodash/omit')
 const jwt = require('jsonwebtoken')
-const cookieParser = require('cookie-parser')
 
 module.exports = {
     bcrypt,

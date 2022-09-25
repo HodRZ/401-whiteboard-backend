@@ -1,6 +1,6 @@
 'use strict'
 
-const { AC_TOKEN } = require("../../../config")
+const { AC_TOKEN, REFRESH_TOKEN } = require("../../../config")
 const { jwt } = require("../../../config/Utils")
 
 function validateToken(req, res, next) {
@@ -19,6 +19,21 @@ function validateToken(req, res, next) {
     }
 }
 
+function validateRefreshToken(req, res, next) {
+    if (!req.headers.cookie) {
+        next('Not Authorized')
+    }
+    try {
+        const refreshToken = req.cookies.refresh_token
+        const verified = jwt.verify(refreshToken, REFRESH_TOKEN)
+        req.verified = verified
+        next()
+    } catch (e) {
+        next(e)
+    }
+}
+
 module.exports = {
-    validateToken
+    validateToken,
+    validateRefreshToken
 }
