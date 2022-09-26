@@ -31,6 +31,7 @@ async function getPostById(req, res, next) {
 };
 
 async function deletePost(req, res, next) {
+    // if (req.user.userRoles == 'admin') {
     const id = req.params.id;
     try {
         let deletedPost = await Post.delete(id, next)
@@ -38,6 +39,9 @@ async function deletePost(req, res, next) {
     } catch (err) {
         next(err)
     }
+    // } else {
+    //     res.status(403).json('unauthorized')
+    // }
 };
 
 async function updatePost(req, res, next) {

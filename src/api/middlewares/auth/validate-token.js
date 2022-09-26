@@ -9,9 +9,7 @@ function validateToken(req, res, next) {
     }
     try {
         const token = req.headers.authorization.split(' ').pop()
-        const userInfo = jwt.verify(token, AC_TOKEN, (err, info) => {
-            (err) ? next(err) : info
-        })
+        const userInfo = jwt.verify(token, AC_TOKEN)
         req.user = userInfo
         next()
     } catch (e) {

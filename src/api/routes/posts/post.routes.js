@@ -13,7 +13,10 @@ router.get('/post/:id', getPostById)
 router.get('/postAll', populate)
 router.use(handleNotFound)
 router.post('/post', createPost)
-router.delete('/post/:id', deletePost)
+router.delete('/post/:id',
+    // validateToken,
+    deletePost
+)
 router.put('/post/:id', updatePost)
 router.use(handleServerError)
 

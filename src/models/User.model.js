@@ -52,6 +52,11 @@ const User = (sequelize, DataTypes, zlib, bcrypt) => sequelize.define('User', {
     },
     access_token: {
         type: DataTypes.VIRTUAL
+    },
+    roles: {
+        type: DataTypes.ENUM,
+        values: ['user', 'admin'],
+        defaultValue: 'user'
     }
 
 })

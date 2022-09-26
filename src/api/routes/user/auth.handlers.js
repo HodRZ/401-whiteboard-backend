@@ -11,19 +11,18 @@ async function signIn(req, res) {
         const token = jwt.sign({
             username: user.username,
             userId: user.id,
-            userEmail: user.email
-        }, AC_TOKEN, { expiresIn: "1H" })
+            userRoles: user.roles
+        }, AC_TOKEN, { expiresIn: "10m" })
         const refresh_token = addRefreshToken({
-            userId: user.id,
-            userEmail: user.email
+            userId: user.id
         })
-        user.token = token
+        user.access_token = token
         return res.status(200)
             .cookie('refresh_token', refresh_token, {
                 httpOnly: true,
                 secure: true,
                 sameSite: 'None',
-                maxAge: 3 * 60 * 60 * 1000
+                maxAge: 2 * 60 * 60 * 1000
             })
             .json(user)
     } catch (e) {
@@ -39,11 +38,10 @@ async function signUp(req, res, next) {
         const token = jwt.sign({
             username: addedUser.username,
             userId: addedUser.id,
-            userEmail: addedUser.email
+            userRoles: addedUser.roles
         }, AC_TOKEN, { expiresIn: '10m' })
         const refresh_token = addRefreshToken({
-            userId: addedUser.id,
-            userEmail: addedUser.email
+            userId: addedUser.id
         })
         addedUser.access_token = token
         await createdUser.update({ refresh_token })
@@ -52,7 +50,7 @@ async function signUp(req, res, next) {
                 httpOnly: true,
                 secure: true,
                 sameSite: 'None',
-                maxAge: 3 * 60 * 60 * 1000
+                maxAge: 2 * 60 * 60 * 1000
             })
             .json(addedUser);
 
@@ -69,14 +67,13 @@ async function refreshSignIn(req, res, next) {
             attributes: { exclude: ['refresh_token', 'password'] }
         })
         const refresh_token = addRefreshToken({
-            userId: user.id,
-            userEmail: user.email
+            userId: user.id
         })
         const token = jwt.sign({
             username: user.username,
             userId: user.id,
-            userEmail: user.email
-        }, AC_TOKEN, { expiresIn: '30m' })
+            userRoles: user.roles
+        }, AC_TOKEN, { expiresIn: '10m' })
         await userModel.update({ refresh_token }, {
             where: { id: userId },
             returning: true,
@@ -88,7 +85,7 @@ async function refreshSignIn(req, res, next) {
                 httpOnly: true,
                 secure: true,
                 sameSite: 'None',
-                maxAge: 3 * 60 * 60 * 1000
+                maxAge: 2 * 60 * 60 * 1000
             })
             .json(user);
 
