@@ -1,6 +1,6 @@
 {
   "name": "401-whiteboard-backend",
-  "version": "1.4.0",
+  "version": "2.1.0",
   "description": "a stress-relief cheerful whiteboard for the 401 class (backend)",
   "main": "index.js",
   "scripts": {

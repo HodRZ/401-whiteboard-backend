@@ -4,7 +4,7 @@
 
 **Github**: [HodRZ](https://github.com/HodRZ)
 
-**Version**: 2.0.0
+**Version**: 2.1.0
 
 **Frontend repo**: [here](https://github.com/HodRZ/401-whiteboard-frontend)
 
@@ -61,4 +61,7 @@ this app uses the **PERN Stack**
 
 - 2.0.0
   - Update routes controllers and middlewares
+
+- 2.1.0
+  - Add roles and protected routes
  <!-- ## Credit and Collaborations -->
