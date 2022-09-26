@@ -12,12 +12,12 @@ router.get('/post', getPost);
 router.get('/post/:id', getPostById)
 router.get('/postAll', populate)
 router.use(handleNotFound)
-router.post('/post', createPost)
+router.post('/post', validateToken, createPost)
 router.delete('/post/:id',
-    // validateToken,
+    validateToken,
     deletePost
 )
-router.put('/post/:id', updatePost)
+router.put('/post/:id', validateToken, updatePost)
 router.use(handleServerError)
 
 module.exports = router
