@@ -6,11 +6,6 @@ const { morgan, cors, helmet, cookieParser } = require('./config/Utils')
 const app = express()
 
 
-//-TODO: 
-//- add cors policy
-//- add refresh token route and controller 
-//- compare users using refresh token
-
 
 app.use(cookieParser())
 app.use(cors({

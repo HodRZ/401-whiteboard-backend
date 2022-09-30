@@ -94,8 +94,22 @@ async function refreshSignIn(req, res, next) {
     }
 }
 
+async function signOut(req, res, next) {
+    try {
+        res.clearCookie('refresh_token', {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None',
+            maxAge: 2 * 60 * 60 * 1000
+        }).sendStatus(204)
+    } catch (e) {
+        next(e)
+    }
+}
+
 module.exports = {
     signIn,
     signUp,
-    refreshSignIn
+    refreshSignIn,
+    signOut
 }
