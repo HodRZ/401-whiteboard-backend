@@ -31,26 +31,23 @@ async function getPostById(req, res, next) {
 };
 
 async function deletePost(req, res, next) {
-    if (req.user.userRoles == 'admin') {
+    try {
         const id = req.params.id;
-        try {
-            let deletedPost = await Post.delete(id, next)
-            res.status(204).json({ deletedPost });
-        } catch (err) {
-            next(err)
-        }
-    } else {
-        res.status(403).json('unauthorized')
+        let deletedPost = await Post.delete(id, next)
+        res.status(204).json({ deletedPost });
+    } catch (err) {
+        next(err)
     }
 };
 
 async function updatePost(req, res, next) {
-    const id = req.params.id;
-    const post = req.body;
     try {
+        const id = req.params.id;
+        const post = req.body;
         const updatedPost = await Post.update(id, post, next)
         res.status(200).json(updatedPost);
     } catch (err) { next(err) }
+
 }
 
 async function populate(req, res, next) {
