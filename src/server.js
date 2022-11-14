@@ -9,7 +9,7 @@ const app = express();
 
 app.use(cookieParser());
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://401-whiteboard.netlify.app', 'https://chakra-whiteboard.netlify.app/'],
+    origin: ['http://localhost:3000', 'https://401-whiteboard.netlify.app', 'https://chakra-whiteboard.netlify.app'],
     credentials: true,
 }));
 app.use(morgan('tiny'));
